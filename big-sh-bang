@@ -1,0 +1,6 @@
+#!/usr/bin/env sh
+
+echo "Creating Universe.."
+git submodule init
+git submodule update
+echo "..BANG!"
