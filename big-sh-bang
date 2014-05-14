@@ -10,7 +10,7 @@ function status {
 }
 
 function istart {
-  sed "s/^/$(tput bold ; tput setaf 8)     /" | sed s/Submodule/Subuniverse/
+  sed "s/^/$(tput bold ; tput setaf 8)    /" | sed s/Submodule/Subuniverse/
 }
 
 function iend {
@@ -22,9 +22,9 @@ function universe {
   status "$gal"
   sleep 1
   status "\n  [Big Bang]\n"
-  git submodule init | istart | iend
+  git submodule init 2>&1 | istart | iend
   status "\n  [Initializing Universe]\n"
-  git submodule update | istart | iend
+  git submodule update 2>&1 | istart | iend
   for d in */ ; do 
     cd $d;
     git checkout master 2>&1 | istart | iend 
