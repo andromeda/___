@@ -4,9 +4,9 @@
 [submodule "nucleosynthesis"]
 	path = nucleosynthesis
 	url = git@github.com:andromeda/nucleosynthesis.git
-[submodule "doc"]
-	path = doc
-	url = git@github.com:andromeda/doc.git
 [submodule "ndr.md"]
 	path = ndr.md
 	url = git@github.com:nvasilakis/ndr.md.git
+[submodule "doc"]
+	path = doc
+	url = git@github.com:andromeda/doc.git
