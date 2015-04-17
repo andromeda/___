@@ -6,7 +6,7 @@ gal="                                                                   .       
 
 # better init colors here
 status() {
-  echo -e "$(tput bold ; tput setaf 8)$1$(tput sgr0)" | sed "s/andromeda/$(tput sgr0)$(tput setaf 7)andromeda$(tput bold ; tput setaf 8)/" 
+  echo "$(tput bold ; tput setaf 8)$1$(tput sgr0)" | sed "s/andromeda/$(tput sgr0)$(tput setaf 7)andromeda$(tput bold ; tput setaf 8)/" 
 }
 
 istart() {
