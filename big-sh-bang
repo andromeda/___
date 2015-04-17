@@ -1,4 +1,4 @@
-#!/usr/bin/env bash
+#!/bin/sh
 
 data="    Apparent mass: ~1,230 billion M☉\n    Age: 9 billion years\n    Magnitude: 3.44\n    Constellation: Andromeda\n    Stars: 1 trillion"
 
