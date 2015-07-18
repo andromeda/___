@@ -21,7 +21,6 @@ iend() {
 universe() {
   clear
   status "$SPLASH"
-  sleep 1
   status "\n  [Big Bang]\n"
   git submodule init 2>&1 | istart | iend
   status "\n  [Initializing Universe]\n"
