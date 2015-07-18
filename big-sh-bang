@@ -4,8 +4,7 @@
 # This script can be called both ways:
 # * If in the andromeda top level repo, just sets up submodules
 # * If used standalone (or via wget), first clones top level repo
-#
-# TODO: convert functions/if to sh
+# TODO: need to make sure git and curl/wget are installed
 
 
 SINGLE_REPO=false
@@ -87,9 +86,7 @@ EOF
 # Generate submodules
 ##
 universe() {
-  clear
-  out "$SPLASH"
-  out "\n  [Big Bang]\n"
+  out "\n  [Registering Universe]\n"
   git submodule init 2>&1 | istart | iend
   out "\n  [Initializing Universe]\n"
   git submodule update 2>&1 | istart | iend
@@ -109,6 +106,11 @@ universe() {
 ##
 cell() {
   out one
+}
+
+prelude() {
+  clear
+  out "$SPLASH"
 }
 
 # Check which argument we have
@@ -134,15 +136,20 @@ while getopts "r:" opt; do
   esac
 done
 
+# TODO: curl/wget qt.ndr.md
 if [[ -e "./.git" ]]; then
   # we are in git, invoke locally
+  prelude
   universe
 else
   # clone repository
   if [[ SINGLE_REPO == true ]]; then
-    git clone git@github.com:andromeda/${REPO_NAME}.git
+    out "\n  [Cloning ${REPO_NAME}]\n"
+    git clone git@github.com:andromeda/${REPO_NAME}.git 2>&1 | grep -v clon
   else
-    git clone git@github.com:andromeda/andromeda.git
+    prelude
+    out "\n  [Cloning Universe]\n"
+    git clone git@github.com:andromeda/andromeda.git > /dev/null 2>&1
     cd andromeda
     universe
   fi
