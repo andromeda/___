@@ -4,8 +4,15 @@
 # This script can be called both ways:
 # * If in the andromeda top level repo, just sets up submodules
 # * If used standalone (or via wget), first clones top level repo
-# TODO: need to make sure git and curl/wget are installed
+#
+# Subprojects might have different dependencies -- see the docs
 
+# GitHub allows HTTP, but would then need to check for curl/wget 
+# and recursively fetch all the repositories, some of which might
+# be private. Easiest way to resolve.
+GIT_ERROR="You need git to get the repositories. Exiting..";
+
+command -v "git" >/dev/null 2>&1 || { echo "$GIT_ERROR"; }
 
 SINGLE_REPO=false
 REPO_NAME=""
@@ -136,7 +143,6 @@ while getopts "r:" opt; do
   esac
 done
 
-# TODO: curl/wget qt.ndr.md
 if [[ -e "./.git" ]]; then
   # we are in git, invoke locally
   prelude
