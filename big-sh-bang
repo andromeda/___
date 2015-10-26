@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 # Pulls repositories as needed (either everything or a single repo)
 #
 # This script can be called both ways:
