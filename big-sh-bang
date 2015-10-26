@@ -95,7 +95,7 @@ universe() {
   out "\n  [Registering Universe]\n"
   git submodule init 2>&1 | istart | iend
   out "\n  [Initializing Universe]\n"
-  { sleep 1 && out "\t..hang tight!" &}
+  { sleep 1 && out "    ..hang tight!" &}
   git submodule update 2>&1 | istart | iend
   for d in */ ; do 
     cd $d;
