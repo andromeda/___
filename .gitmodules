@@ -16,3 +16,6 @@
 [submodule "hspace"]
 	path = hspace
 	url = git@github.com:andromeda/hspace.git
+[submodule "jesc"]
+	path = jesc
+	url = git@github.com:andromeda/jesc.git
