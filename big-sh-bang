@@ -158,5 +158,11 @@ else
     git clone git@github.com:andromeda/andromeda.git > /dev/null 2>&1
     cd andromeda
     universe
+    out "  [Patching .*rc]\n"
+    for file in .*shrc; do
+      echo "m31=$(pwd)" >> $file
+      echo 'alias m31=$m31/m31/src/shell.js' >> $file
+    done
   fi
 fi
+
