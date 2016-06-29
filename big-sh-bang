@@ -119,9 +119,9 @@ cell() {
 # Add aliases to .*shrc's
 ##
 patch-rc() {
-  echo "You can add the following shortcuts to your shell startup file"
-  echo "andromeda=$(pwd)"
-  echo "alias andromeda='$(pwd)/andromeda/andromeda.js'"
+  out "You can add the following shortcuts to your shell startup file"
+  out "  andromeda=$(pwd)"
+  out "  alias andromeda='$(pwd)/andromeda/andromeda.js'"
   #for file in .*shrc; do
   #  echo "m31=$(pwd)" >> $file
   #  echo 'alias m31=$m31/m31/src/shell.js' >> $file
