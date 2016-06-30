@@ -10,9 +10,9 @@
 [submodule "doc"]
 	path = doc
 	url = git@github.com:andromeda/doc.git
-[submodule "m31"]
+[submodule "andromeda"]
 	path = andromeda
-	url = git@github.com:andromeda/m31.git
+	url = git@github.com:andromeda/andromeda.git
 [submodule "hspace"]
 	path = hspace
 	url = git@github.com:andromeda/hspace.git
