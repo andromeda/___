@@ -119,9 +119,12 @@ cell() {
 # Add aliases to .*shrc's
 ##
 patch-rc() {
-  out "You can add the following shortcuts to your shell startup file"
-  out "  andromeda=$(pwd)"
-  out "  alias andromeda='$(pwd)/andromeda/andromeda.js'"
+  out "  [Patching .*rc]\n"
+  out "  You can add the following shortcuts to your shell startup file"
+  # Andromeda
+  out "    androdev=$(pwd)"
+  out "    andromeda=$(pwd)/andromeda"
+  out "    alias andromeda='node $(pwd)/andromeda/andromeda.js'"
   #for file in .*shrc; do
   #  echo "m31=$(pwd)" >> $file
   #  echo 'alias m31=$m31/m31/src/shell.js' >> $file
@@ -171,7 +174,6 @@ else
     git clone git@github.com:andromeda/universe.git > /dev/null 2>&1
     cd universe
     generate-submodules
-    out "  [Patching .*rc]\n"
     patch-rc
   fi
 fi
