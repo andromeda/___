@@ -91,7 +91,7 @@ EOF
 ##
 # Generate submodules
 ##
-universe() {
+generate-submodules() {
   out "\n  [Registering Universe]\n"
   git submodule init 2>&1 | istart | iend
   out "\n  [Initializing Universe]\n"
@@ -113,6 +113,19 @@ universe() {
 ##
 cell() {
   out one
+}
+
+##
+# Add aliases to .*shrc's
+##
+patch-rc() {
+  echo "You can add the following shortcuts to your shell startup file"
+  echo "andromeda=$(pwd)"
+  echo "alias andromeda='$(pwd)/andromeda/andromeda.js'"
+  #for file in .*shrc; do
+  #  echo "m31=$(pwd)" >> $file
+  #  echo 'alias m31=$m31/m31/src/shell.js' >> $file
+  #done
 }
 
 prelude() {
@@ -146,7 +159,7 @@ done
 if [[ -e "./.git" ]]; then
   # we are in git, invoke locally
   prelude
-  universe
+  generate-submodules
 else
   # clone repository
   if [[ SINGLE_REPO == true ]]; then
@@ -155,14 +168,10 @@ else
   else
     prelude
     out "  [Cloning Universe]\n"
-    git clone git@github.com:andromeda/andromeda.git > /dev/null 2>&1
-    cd andromeda
-    universe
+    git clone git@github.com:andromeda/universe.git > /dev/null 2>&1
+    cd universe
+    generate-submodules
     out "  [Patching .*rc]\n"
-    for file in .*shrc; do
-      echo "m31=$(pwd)" >> $file
-      echo 'alias m31=$m31/m31/src/shell.js' >> $file
-    done
+    patch-rc
   fi
 fi
-
