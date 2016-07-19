@@ -73,7 +73,7 @@ iend() {
 
 
 usage() {
-  read -r -d '' _contents  <<-'EOF'
+  echo "
   Usage: ./$(basename $0)
 
   Fetches the andromeda repositories and prepares the environment (dependencies).
@@ -83,8 +83,7 @@ usage() {
   -r <repo>:          Tries to fetch  a particular repository.
   -h:                 This help message
 
-EOF
-  out contents
+  "
 }
 
 
@@ -137,7 +136,7 @@ prelude() {
 }
 
 # Check which argument we have
-while getopts "r:" opt; do
+while getopts "r:h" opt; do
   case $opt in
     r) 
       out "Repository picked: ${OPTARG}"
@@ -165,7 +164,7 @@ if [[ -e "./.git" ]]; then
   generate-submodules
 else
   # clone repository
-  if [[ SINGLE_REPO == true ]]; then
+  if [[ $SINGLE_REPO == 'true' ]]; then
     out "\n  [Cloning ${REPO_NAME}]\n"
     git clone git@github.com:andromeda/${REPO_NAME}.git 2>&1 | grep -v clon
   else
