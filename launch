@@ -1,0 +1,61 @@
+#!/bin/sh
+
+# will install dependencies locally.
+# TODO: for system-wide install pass a `-g`
+
+# by default will install to .bin. TODO can change with --prefix
+PREFIX="~/.bin"
+
+DOWNLOADER='curl'
+
+download () {
+    command -v curl >/dev/null 2>&1 || 
+        { DOWNLOADER='wget'; alias curl='wget -qO- '; }
+}
+
+node_exists () {
+    command -v node >/dev/null 2>&1 && 
+        echo 'true' ||
+        echo 'false';
+}
+
+node_version () {
+    v=$(node -v | tr -d v | sed 's/\..*$//'); 
+    if [ $v -ge '4' ]; then
+        echo 'true'
+    else
+        echo 'false'
+    fi
+}
+
+node_install () {
+    # by default, will install the version I have locally:)
+    VERSION='5.3.0'
+    PLATFORM=$(uname | tr '[:upper:]' '[:lower:]')
+
+    if [ $PLATFORM = 'darwin' ]; then
+        # I don't see any x32 for Darwin!
+        ARCH=x64;
+    else
+        if [ $(uname -m) == 'x86_64' ]; then
+            ARCH=x64
+        else
+            ARCH=x86
+        fi
+    fi
+
+    PREFIX="$PREFIX/node-v$VERSION-$PLATFORM-$ARCH";
+
+    #test if git/curl/etc etc. are here
+    # brew
+    # also, check if node is around
+    URL=http://nodejs.org/dist/v$VERSION/node-v$VERSION-$PLATFORM-$ARCH.tar.gz
+    echo "Downloading node ($URL) into $PREFIX"
+    echo "(this might take a while depending on your connection)"
+    mkdir -p "$PREFIX" && curl $URL | 
+        tar xzvf - --strip-components=1 -C "$PREFIX"
+    for i in ~/.*shrc; do
+        echo "Adding path to startup: ~/$i"
+        echo "export PATH=\"$PATH:$PREFIX\" # andromeda node" >> ~/$i
+    done
+}
