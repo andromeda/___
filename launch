@@ -5,10 +5,11 @@
 
 # by default will install to .bin. TODO can change with --prefix
 PREFIX="~/.bin"
-
 DOWNLOADER='curl'
+alias curl='curl -s'
 
 download () {
+    # fixme: if this is a subprocess -- will it work?
     command -v curl >/dev/null 2>&1 || 
         { DOWNLOADER='wget'; alias curl='wget -qO- '; }
 }
@@ -59,3 +60,15 @@ node_install () {
         echo "export PATH=\"$PATH:$PREFIX\" # andromeda node" >> ~/$i
     done
 }
+
+andromeda_install () {
+    # People need to have access to the repo
+    curl repos.ndr.md | bash -s -- -r andromeda
+
+    cd andromeda && 
+        npm install --production . && 
+        echo 'Andromeda Installed'
+}
+
+# script should ensure that this is the right andromeda package
+
