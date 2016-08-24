@@ -56,8 +56,8 @@ node_install () {
     mkdir -p "$PREFIX" && curl $URL | 
         tar xzvf - --strip-components=1 -C "$PREFIX"
     for i in ~/.*shrc; do
-        echo "Adding path to startup: ~/$i"
-        echo "export PATH=\"$PATH:$PREFIX\" # andromeda node" >> ~/$i
+        echo "Adding path to startup: $i"
+        echo "export PATH=\"$PATH:$PREFIX\" # andromeda node" >> $i
     done
 }
 
