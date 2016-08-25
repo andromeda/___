@@ -6,7 +6,7 @@
 # will install dependencies locally.
 # TODO: for system-wide install pass a `-g`
 # by default will install to .bin. TODO can change with --prefix
-PREFIX="~/.bin"
+PREFIX=~/.bin
 DOWNLOADER='curl'
 alias curl='curl -s'
 
@@ -52,15 +52,15 @@ node_install () {
     URL=http://nodejs.org/dist/v$VERSION/node-v$VERSION-$PLATFORM-$ARCH.tar.gz
     echo "Downloading node ($URL) into $PREFIX"
     echo "(this might take a while depending on your connection)"
-    mkdir -p "$PREFIX" && curl $URL | 
-        tar xzvf - --strip-components=1 -C "$PREFIX"
+    mkdir -p "$PREFIX";
+    curl $URL | tar xzvf - --strip-components=1 -C "$PREFIX"
     if [[ $PATH != *":$PREFIX"* ]]
     then
         for i in ~/.*shrc; do
-            echo "Adding path $PREFIX to startup: $i"
-            echo "export PATH=\"$PATH:$PREFIX\" # andromeda node" >> $i
+            echo "Adding path $PREFIX/bin to startup: $i"
+            echo "export PATH=\"$PATH:$PREFIX/bin\" # andromeda node" >> $i
         done
-        export PATH="$PATH:$PREFIX"
+        export PATH="$PATH:$PREFIX/bin"
     fi
 }
 
