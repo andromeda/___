@@ -1,8 +1,10 @@
 #!/bin/bash
 
+# No need to check for git, brew etc. (can just use HTTP for now, at
+# least until package is publicly available)
+
 # will install dependencies locally.
 # TODO: for system-wide install pass a `-g`
-
 # by default will install to .bin. TODO can change with --prefix
 PREFIX="~/.bin"
 DOWNLOADER='curl'
@@ -14,8 +16,8 @@ download () {
         { DOWNLOADER='wget'; alias curl='wget -qO- '; }
 }
 
-node_exists () {
-    command -v node >/dev/null 2>&1 && 
+cmd_exists () {
+    command -v $1 >/dev/null 2>&1 && 
         echo 'true' ||
         echo 'false';
 }
@@ -47,9 +49,6 @@ node_install () {
 
     PREFIX="$PREFIX/node-v$VERSION-$PLATFORM-$ARCH";
 
-    #test if git/curl/etc etc. are here
-    # brew
-    # also, check if node is around
     URL=http://nodejs.org/dist/v$VERSION/node-v$VERSION-$PLATFORM-$ARCH.tar.gz
     echo "Downloading node ($URL) into $PREFIX"
     echo "(this might take a while depending on your connection)"
@@ -74,5 +73,8 @@ andromeda_install () {
         echo 'Andromeda Installed'
 }
 
-# script should ensure that this is the right andromeda package
+if [[ $(cmd_exists node) == "false" ]]; then
+    node_install
+fi
 
+andromeda_install
