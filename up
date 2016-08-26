@@ -65,12 +65,19 @@ node_install () {
         done
         export PATH="$PATH:$PREFIX/bin"
     fi
-    echo "Restart your shell or run: export PATH=\"$PATH:$BINDIR\""
 }
 
 andromeda_install () {
     # 1 OK, get the code (dev version)
     curl -s $LATEST | tar xzvf - --strip-components=1 -C $BINDIR
+    ln -sf $BINDIR/andromeda $BINDIR/andromeda.js
+}
+
+path_note () {
+  echo "You can now launch Andromeda: "
+  echo " * if $BINDIR is in your PATH, run \"andromeda\""
+  echo " * if not, restart your shell or run \"export PATH=\$PATH:$BINDIR\""
+  echo "       (and then run \"andromeda\")"
 }
 
 if [[ $(cmd_exists node) == "false" ]]; then
@@ -78,4 +85,5 @@ if [[ $(cmd_exists node) == "false" ]]; then
 fi
 
 mkdir -p $BINDIR
-andromeda_install
+andromeda_install && path_note || echo 'something went wrong; please let me know.'
+
