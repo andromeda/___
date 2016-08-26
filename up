@@ -70,7 +70,7 @@ node_install () {
 andromeda_install () {
     # 1 OK, get the code (dev version)
     curl -s $LATEST | tar xzvf - --strip-components=1 -C $BINDIR
-    ln -sf $BINDIR/andromeda $BINDIR/andromeda.js
+    ln -sf $BINDIR/andromeda.js $BINDIR/andromeda
 }
 
 path_note () {
