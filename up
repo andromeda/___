@@ -6,9 +6,11 @@
 # will install dependencies locally.
 # TODO: for system-wide install pass a `-g`
 # by default will install to .bin. TODO can change with --prefix
-PREFIX=~/.bin
+BINDIR=~/.local/bin
+LATEST='http://ndr.md/releases/latest.tar.gz'
 DOWNLOADER='curl'
 alias curl='curl -s'
+mkdir -p $BINDIR
 
 download () {
     # fixme: if this is a subprocess -- will it work?
@@ -47,34 +49,33 @@ node_install () {
         fi
     fi
 
-    PREFIX="$PREFIX/node-v$VERSION-$PLATFORM-$ARCH";
-
+    PREFIX="$BINDIR/node-v$VERSION-$PLATFORM-$ARCH";
     URL=http://nodejs.org/dist/v$VERSION/node-v$VERSION-$PLATFORM-$ARCH.tar.gz
-    echo "Downloading node ($URL) into $PREFIX"
+    echo "Downloading node ($URL) into $BINDIR"
     echo "(this might take a while depending on your connection)"
     mkdir -p "$PREFIX";
     curl $URL | tar xzvf - --strip-components=1 -C "$PREFIX"
-    if [[ $PATH != *":$PREFIX"* ]]
+    mv $PREFIX/bin/* $BINDIR
+    rm -rf $PREFIX
+    if [[ $PATH != *":$BINDIR"* ]]
     then
         for i in ~/.*shrc; do
             echo "Adding path $PREFIX/bin to startup: $i"
-            echo "export PATH=\"$PATH:$PREFIX/bin\" # andromeda node" >> $i
+            echo "export PATH=\"$PATH:$BINDIR\" # andromeda node" >> $i
         done
         export PATH="$PATH:$PREFIX/bin"
     fi
+    echo "Restart your shell or run: export PATH=\"$PATH:$BINDIR\""
 }
 
 andromeda_install () {
-    # People need to have access to the repo
-    curl repos.ndr.md | bash -s -- -r andromeda
-
-    cd andromeda && 
-        npm install --production . && 
-        echo 'Andromeda Installed'
+    # 1 OK, get the code (dev version)
+    curl -s $LATEST | tar xzvf - --strip-components=1 -C $BINDIR
 }
 
 if [[ $(cmd_exists node) == "false" ]]; then
-    node_install
+   node_install 
 fi
 
+mkdir -p $BINDIR
 andromeda_install
