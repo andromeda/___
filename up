@@ -7,7 +7,7 @@
 # TODO: for system-wide install pass a `-g`
 # by default will install to .bin. TODO can change with --prefix
 BINDIR=~/.local/bin
-LATEST='http://ndr.md/releases/latest.tar.gz'
+LATEST='http://ndr.md/releases/latest'
 DOWNLOADER='curl'
 alias curl='curl -s'
 mkdir -p $BINDIR
