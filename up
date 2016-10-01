@@ -53,8 +53,8 @@ node_install () {
     URL=http://nodejs.org/dist/v$VERSION/node-v$VERSION-$PLATFORM-$ARCH.tar.gz
     echo "Downloading node ($URL) into $BINDIR"
     echo "(this might take a while depending on your connection)"
-    mkdir -p "$PREFIX";
-    curl $URL | tar xzvf - --strip-components=1 -C "$PREFIX"
+    mkdir -p $PREFIX;
+    curl $URL | tar xzf - --strip-components=1 -C $PREFIX
     mv $PREFIX/bin/* $BINDIR
     rm -rf $PREFIX
     if [[ $PATH != *":$BINDIR"* ]]
@@ -69,7 +69,7 @@ node_install () {
 
 andromeda_install () {
     # 1 OK, get the code (dev version)
-    curl -s $LATEST | tar xzvf - --strip-components=1 -C $BINDIR
+    curl -s $LATEST | tar xzf - --strip-components=1 -C $BINDIR
     ln -sf $BINDIR/andromeda.js $BINDIR/andromeda
 }
 
