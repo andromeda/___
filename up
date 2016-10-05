@@ -67,17 +67,33 @@ node_install () {
     fi
 }
 
+hosted_startup() {
+	sh >$BINDIR/andromeda <<EOF
+#!/bin/sh
+cmd_exists () {
+    command -v $1 >/dev/null 2>&1 && echo 'true' || echo 'false';
+}
+# if node does not exist in PATH, look up:)
+if [[ $(cmd_exists node) == "false" ]]; then
+  if [ ! -f ../node ]; then
+      echo "JavaScript could not be found!"
+  fi
+   ../node ../andromeda.js
+else
+  node ../andromeda.js
+fi
+EOF
+}
+
 andromeda_install () {
     # 1 OK, get the code (dev version)
     curl -s $LATEST | tar xzf - --strip-components=1 -C $BINDIR
-    ln -sf $BINDIR/andromeda.js $BINDIR/andromeda
+#   ln -sf $BINDIR/andromeda.js $BINDIR/andromeda
+    hosted_startup
 }
 
 path_note () {
-  echo "You can now launch Andromeda: "
-  echo " * if $BINDIR is in your PATH, run \"andromeda\""
-  echo " * if not, restart your shell or run \"export PATH=\$PATH:$BINDIR\""
-  echo "       (and then run \"andromeda\")"
+  echo "Launch using \`$BINDIR/andromeda\`"
 }
 
 if [[ $(cmd_exists node) == "false" ]]; then
