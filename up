@@ -74,7 +74,7 @@ cmd_exists () {
     command -v $1 >/dev/null 2>&1 && echo 'true' || echo 'false';
 }
 # if node does not exist in PATH, look up:)
-if [[ $(cmd_exists node) == "false" ]]; then
+if [ $(cmd_exists node) = "false" ]; then
   if [ ! -f ../node ]; then
       echo "JavaScript could not be found!"
   fi
