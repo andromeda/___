@@ -69,18 +69,28 @@ node_install () {
 
 unix_startup() {
 	cat  <<- 'EOF' >$BINDIR/andromeda
-#!/bin/sh
+#!/bin/bash
+
+SOURCE="${BASH_SOURCE[0]}"
+while [ -h "$SOURCE" ]; do # resolve $SOURCE until the file is no longer a symlink
+  DIR="$( cd -P "$( dirname "$SOURCE" )" && pwd )"
+  SOURCE="$(readlink "$SOURCE")"
+  [[ $SOURCE != /* ]] && SOURCE="$DIR/$SOURCE" # if $SOURCE was a relative symlink, we need to resolve it relative to the path where the symlink file was located
+done
+DIR="$( cd -P "$( dirname "$SOURCE" )" && pwd )"
+
 cmd_exists () {
     command -v $1 >/dev/null 2>&1 && echo 'true' || echo 'false';
 }
-# if node does not exist in PATH, look up:)
-if [ $(cmd_exists node) = "false" ]; then
-  if [ ! -f ../node ]; then
+
+# if node does not exist in PATH, in the same dir
+if [[ $(cmd_exists node) == "false" ]]; then
+  if [ ! -f $DIR/../node ]; then
       echo "JavaScript could not be found!"
   fi
-   ../node ../andromeda.js
+   $DIR/node $DIR/andromeda.js
 else
-  node ../andromeda.js
+  node $DIR/andromeda.js
 fi
 EOF
   chmod +x $BINDIR/andromeda
