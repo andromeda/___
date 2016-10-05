@@ -67,8 +67,8 @@ node_install () {
     fi
 }
 
-hosted_startup() {
-	sh >$BINDIR/andromeda <<EOF
+unix_startup() {
+	cat  <<- 'EOF' >$BINDIR/andromeda
 #!/bin/sh
 cmd_exists () {
     command -v $1 >/dev/null 2>&1 && echo 'true' || echo 'false';
@@ -83,13 +83,14 @@ else
   node ../andromeda.js
 fi
 EOF
+  chmod +x $BINDIR/andromeda
 }
 
 andromeda_install () {
     # 1 OK, get the code (dev version)
     curl -s $LATEST | tar xzf - --strip-components=1 -C $BINDIR
 #   ln -sf $BINDIR/andromeda.js $BINDIR/andromeda
-    hosted_startup
+    unix_startup
 }
 
 path_note () {
