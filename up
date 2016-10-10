@@ -51,10 +51,10 @@ node_install () {
 
     PREFIX="$BINDIR/node-v$VERSION-$PLATFORM-$ARCH";
     URL=http://nodejs.org/dist/v$VERSION/node-v$VERSION-$PLATFORM-$ARCH.tar.gz
-    echo "Downloading node ($URL) into $BINDIR"
+    echo "Downloading dependencies ($VERSION-$PLATFORM-$ARCH) into $BINDIR"
     echo "(this might take a while depending on your connection)"
     mkdir -p $PREFIX;
-    curl $URL | tar xzf - --strip-components=1 -C $PREFIX
+    curl -s $URL | tar xzf - --strip-components=1 -C $PREFIX
     mv $PREFIX/bin/* $BINDIR
     rm -rf $PREFIX
     if [[ $PATH != *":$BINDIR"* ]]
@@ -85,9 +85,6 @@ cmd_exists () {
 
 # if node does not exist in PATH, in the same dir
 if [[ $(cmd_exists node) == "false" ]]; then
-  if [ ! -f $DIR/../node ]; then
-      echo "JavaScript could not be found!"
-  fi
    $DIR/node $DIR/andromeda.js
 else
   node $DIR/andromeda.js
