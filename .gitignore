@@ -1,4 +1,5 @@
 local/
+releases/
 *.tar.gz
 *.DS_Store
 *.swp
