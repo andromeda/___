@@ -1,5 +1,6 @@
 #!env node
 
+// All scripts should do the pull themselves
 var http = require('http');
 var url  = require('url');
 var exec = require('child_process').exec;
@@ -37,13 +38,10 @@ var rels = function (req, res) {
 };
 
 var runTask = function (script, req, res) {
-    exec(gitPull, function(error, stdout, stderr) {
+    exec(script, function(error, stdout, stderr) {
         if (!error) {
-            exec(script, function(error, stdout, stderr) {
-                console.log(makeSh + "\n" + stdout);
-            });
-            res200(req, ers);
-            console.log(gitPull + "\n" + stdout);
+            console.log(script + "\n" + stdout);
+            res200(req, res);
         } else {
             resError(500, 'Internal Server Error\n', req, res);
             console.log("There was an error running pull\n" + error.stack);
