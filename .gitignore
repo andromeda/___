@@ -1,4 +1,7 @@
 local/
+malicious/
+etc/
+corpora/
 releases/
 *.tar.gz
 *.DS_Store
