@@ -83,12 +83,7 @@ cmd_exists () {
     command -v $1 >/dev/null 2>&1 && echo 'true' || echo 'false';
 }
 
-# if node does not exist in PATH, in the same dir
-if [[ $(cmd_exists node) == "false" ]]; then
-   $DIR/node $DIR/andromeda.js
-else
-  node $DIR/andromeda.js
-fi
+$DIR/node $DIR/andromeda.js
 EOF
   chmod +x $BINDIR/andromeda
 }
@@ -104,10 +99,8 @@ path_note () {
   echo "Launch using \`$BINDIR/andromeda\`"
 }
 
-if [[ $(cmd_exists node) == "false" ]]; then
-   node_install 
-fi
-
+# by default, fetch everything
+node_install 
 mkdir -p $BINDIR
 andromeda_install && path_note || echo 'something went wrong; please let me know.'
 
