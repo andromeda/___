@@ -61,7 +61,7 @@ node_install () {
     then
         for i in ~/.*shrc; do
             echo "Adding path $PREFIX/bin to startup: $i"
-            echo "export PATH=\"$PATH:$BINDIR\" # andromeda node" >> $i
+            echo "export PATH=\"\$PATH:$BINDIR\" # andromeda node" >> $i
         done
         export PATH="$PATH:$PREFIX/bin"
     fi
