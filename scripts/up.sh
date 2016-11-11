@@ -57,14 +57,14 @@ node_install () {
     curl -s $URL | tar xzf - --strip-components=1 -C $PREFIX
     mv $PREFIX/bin/* $BINDIR
     rm -rf $PREFIX
-    if [[ $PATH != *":$BINDIR"* ]]
-    then
-        for i in ~/.*shrc; do
-            echo "Adding path $PREFIX/bin to startup: $i"
-            echo "export PATH=\"\$PATH:$BINDIR\" # andromeda node" >> $i
-        done
-        export PATH="$PATH:$PREFIX/bin"
-    fi
+    #if [[ $PATH != *":$BINDIR"* ]]
+    #then
+    #    for i in ~/.*shrc; do
+    #        echo "Adding path $PREFIX/bin to startup: $i"
+    #        echo "export PATH=\"\$PATH:$BINDIR\" # andromeda node" >> $i
+    #    done
+    #    export PATH="$PATH:$PREFIX/bin"
+    #fi
 }
 
 unix_startup() {
@@ -83,7 +83,7 @@ cmd_exists () {
     command -v $1 >/dev/null 2>&1 && echo 'true' || echo 'false';
 }
 
-$DIR/node $DIR/andromeda.js
+$DIR/node $DIR/andromeda.js "$*"
 EOF
   chmod +x $BINDIR/andromeda
 }
