@@ -108,7 +108,7 @@ generate-submodules() {
   _V=${VERSION:-$(echo $_v | sed "s/^.*\"version\":[ ]*\"\(.*\)\".*$/\1/")};
   _REVISION="$(git -C ./andromeda rev-parse --short HEAD)";
   _SUMMARY=$(git -C ./andromeda log -1 --pretty=%B | head -n 1);
-  out "\n  [Andromeda v.$_V:$_REVISION -- $_SUMMARY]\n"
+  out "\n  [andromeda v.$_V:$_REVISION -- $_SUMMARY]\n"
 }
 
 ##
@@ -143,13 +143,13 @@ link-package() {
   # DEPS=$(echo "attn./ doc/ logger/ utils/")
   out "  [Linking Packages]\n"
   cd logger/
-  npm --quiet --silent install
-  npm link ../utils
-  npm link ../attn.
-  cd ../andromeda/
-  npm --quiet --silent install
-  npm link ../utils
-  npm link ../logger
+  npm --loglevel=silent install > /dev/null
+  npm --loglevel=silent link ../utils > /dev/null
+  npm --loglevel=silent link ../attn. > /dev/null
+  cd ../andromeda/ > /dev/null 2>&1
+  npm --loglevel=silent install > /dev/null
+  npm --loglevel=silent link ../utils > /dev/null
+  npm --loglevel=silent link ../logger > /dev/null
   cd ..
 }
 
@@ -196,9 +196,9 @@ else
     out "\n consider linking the dependencies together. See more about this at"
     out "\n http://docs.ndr.md/book#setup-linking"
   else
-    out "  [Cloning Universe]\n"
-    git clone git@github.com:andromeda/universe.git > /dev/null 2>&1
-    cd universe
+    out "  [Cloning Repositories]\n"
+    git clone git@github.com:andromeda/___.git ./andromeda___ > /dev/null 2>&1
+    cd andromeda___
     generate-submodules
     link-package
     patch-shell-config
