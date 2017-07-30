@@ -22,3 +22,6 @@
 [submodule "utils"]
 	path = utils
 	url = git@github.com:andromeda/utils.git
+[submodule "attn."]
+	path = attn.
+	url = git@github.com:andromeda/attn..git
