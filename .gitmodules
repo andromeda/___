@@ -19,3 +19,6 @@
 [submodule "jesc"]
 	path = jesc
 	url = git@github.com:andromeda/jesc.git
+[submodule "utils"]
+	path = utils
+	url = git@github.com:andromeda/utils.git
