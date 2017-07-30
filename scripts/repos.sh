@@ -17,7 +17,8 @@ command -v "git" >/dev/null 2>&1 || { echo "$GIT_ERROR"; }
 SINGLE_REPO=false
 REPO_NAME=""
 M31_INFO="    Apparent mass: ~1,230 billion M☉\n    Age: 9 billion years\n    Magnitude: 3.44\n    Constellation: Andromeda\n    Stars: 1 trillion"
-SPLASH="$(cat ./splash.sh)"
+SURL="https://raw.githubusercontent.com/andromeda/___/master/scripts/splash.sh"
+# SPLASH="$(curl $SURL)"
 
 ##
 # First argument (optional) is a severity:
@@ -118,7 +119,7 @@ cell() {
 ##
 patch-shell-config() {
   out "  [Patching .*rc]\n"
-  out "  You can add the following shortcuts to your shell startup file"
+  echo "  You can add the following shortcuts to your shell startup file"
   # Andromeda
   out "    androdev=$(pwd)"
   out "    andromeda=$(pwd)/andromeda"
@@ -138,11 +139,11 @@ link-package() {
   # DEPS=$(echo "attn./ doc/ logger/ utils/")
   out "  [Linking Packages]\n"
   cd logger/
-  npm install
+  npm --quiet install
   npm link ../utils
   npm link ../attn.
   cd ../andromeda/
-  npm install
+  npm --quiet install
   npm link ../utils
   npm link ../logger
 }
