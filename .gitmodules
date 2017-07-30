@@ -25,3 +25,6 @@
 [submodule "attn."]
 	path = attn.
 	url = git@github.com:andromeda/attn..git
+[submodule "logger"]
+	path = logger
+	url = git@github.com:andromeda/logger.git
