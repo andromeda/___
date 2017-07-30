@@ -104,7 +104,11 @@ generate-submodules() {
     git pull 2>&1 | istart | iend 
     cd ..;
   done
-  out "\n  [Time is now $(date) +2,538,000 light years..]\n"
+  _v=$(grep -s version ./andromeda/package.json || echo '"version": "0.1"')
+  _V=${VERSION:-$(echo $_v | sed "s/^.*\"version\":[ ]*\"\(.*\)\".*$/\1/")};
+  _REVISION="$(git -C ./andromeda rev-parse --short HEAD)";
+  _SUMMARY=$(git -C ./andromeda log -1 --pretty=%B | head -n 1);
+  out "\n  [Andromeda v.$_V:$_REVISION -- $_SUMMARY]\n"
 }
 
 ##
@@ -139,13 +143,14 @@ link-package() {
   # DEPS=$(echo "attn./ doc/ logger/ utils/")
   out "  [Linking Packages]\n"
   cd logger/
-  npm --quiet install
+  npm --quiet --silent install
   npm link ../utils
   npm link ../attn.
   cd ../andromeda/
-  npm --quiet install
+  npm --quiet --silent install
   npm link ../utils
   npm link ../logger
+  cd ..
 }
 
 
@@ -181,17 +186,21 @@ if [[ -e "./.git" ]]; then
   # we are in git, invoke locally
   generate-submodules
   link-package
+  # patch-shell-config
 else
   # clone repository
   if [[ $SINGLE_REPO == 'true' ]]; then
     out "\n  [Cloning ${REPO_NAME}]\n"
     git clone git@github.com:andromeda/${REPO_NAME}.git 2>&1 | grep -v clon
+    out "\n If you plan to develop in more than one andromeda repositories,"
+    out "\n consider linking the dependencies together. See more about this at"
+    out "\n http://docs.ndr.md/book#setup-linking"
   else
     out "  [Cloning Universe]\n"
     git clone git@github.com:andromeda/universe.git > /dev/null 2>&1
     cd universe
     generate-submodules
-    patch-shell-config
     link-package
+    patch-shell-config
   fi
 fi
