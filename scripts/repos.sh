@@ -17,7 +17,8 @@ command -v "git" >/dev/null 2>&1 || { echo "$GIT_ERROR"; }
 SINGLE_REPO=false
 REPO_NAME=""
 M31_INFO="    Apparent mass: ~1,230 billion M☉\n    Age: 9 billion years\n    Magnitude: 3.44\n    Constellation: Andromeda\n    Stars: 1 trillion"
-SPLASH="                                                                   .                                                     \n                                                           .  .   .           .     .                                    \n                                              ?.      .      .      ~      :                                             \n                                 ,.       .   .. .         . .           .  .                                            \n                               . ? .   +  .   .     .  =.     ?,    , : :.                                               \n                             .         ?,  ..        .,  :   =    :,     . ?..  .            .                           \n                             .O                    =.  ,..  ,  ,.  . ,~.~?   . ..  =.  =.     .                          \n                      :  ~  .      ,.    . , ~: :$. ~.?I, 7::.~     .~. ,   ..~ : ::  ..      ,                          \n                     .,      .          =, ~ ,7?, + .?   .: ..,  .. .  ? .      .=  :  ND.,. ..                          \n                   ,,,   ,  = .  , .. .=,::=,.~= ~~~  : ~.  +=      :,.=.  :~    ~  ::  .: ,  +    ,,                    \n                   .  :.       .    . ..   .O . ..     . ..   I:., .=.,  . .    .     .  .. ? ~ .                        \n                ..       ,Z ..  + ,.,$? I?+= . O  Z  = ,.  +== Z.+ ~:=,:~ .    , ,        .,  ..    .                    \n            . ..                . ~  ?$,:?.= : . +,, .  ID:8=  :. =+7 ? I+ =~=:~ .     ..    ~.    .    .=               \n           , , .     .   .    ..?   = :.  . 8~O    . ~?::,?8D+8I$MZZOZ??M$ .., ?~. :   ~ I .  .7   .    ~ . .            \n             ? =.       ~      .  .Z?++  + ...  Z. I= =,7=MMMMI..~  DN== $ ?Z7O~,I?   I  .   ,.: .   . ~ =       .       \n          .     ,        .   .?,. :???:.     ..  .~~=+?MMDMMMD8= :+7 I~ 7.7~.~I+?,=.=. .  .       ,.= .        .         \n          .    ? .         ,.  ?  .N8+,  I8   . I=7:~ZMMMMDO8?8I:? ~.,=. ,? .,77,= =Z..           ?  ~ .,   ~      =     \n         .....   =         8. I7 ?M= Z+.:~ . ~. =. ,?IZMMMN=M7ODM77 , ? =.I  ~I=7,$$?~. =.~. ,  . , . =  . .~            \n        , $..   I ..  .    . ?+ M~~I$, . ..  I.. ~,?:?MMMMMMMMOM8N7=   . ...= =.?~:$:,,$.=  ..           .  .  ..        \n      .   . M.      +           .?N?= II+..O , Z?=?I.=OMMMMMMMMMMMZ, 8 . =  =..:.:. ,~ I             +  . .?  :~   .     \n     .  . ..        :    .  ,     ,$$+8~ :  .I.D . ,7:77INNMMMMMMON~:+?I..$ I,. ~+ Z+?+.+ = I.. ?         =    : .       \n       :     I     .     ,     ..  +N I,I  .7 ..7 ?,= ?? 7$M8MMMMM:M=,=?.~..I,,    7 8+7 =.. .7,            : . 7 .      \n    .   =      .  .      .,  .   .~:D=D$~ :.:..    7.ZD~I:IN:D8MMMMMO,.. . .   7Z  :  ,. ,~    ..    .        7 ,: .  7. \n        +.  :   ~              7 7 + ~7+?=N =. +.+ I :N.7..Z DZMMNM77= $.N I ~ ?.=,:O.   M+         .. .  .   ,.. .,     \n        ~ :.         .        : : . =.7$7? =.N=? ..I+. O7,N=NMMOM.8,$$+N  .  ,...  . ..~OM7O.        .             .     \n         Z.  .       =         .       I=.,D7=M,7=7+IZ8,OZ$7NZ7D$+ $II~      .,   .  .  ,..:=., .         ~.  +     .~.. \n     ,.      =            .~    ,~  .Z,.  =, =8ZN~7,8:+8N8MM7M?7$7..IN$ . ..,  ,~  +  .. I.:  =     ..          ,.       \n        , .+          .   $       +.=   :M  ?.  $IO= I,78M?Z. +: ,~:  .I, ~  .,: 7:.. .,?I:?  .     7            ,    O.7\n     :$,  .   = .      =  ..        ~.. $ 8: =. O I . =+.=+ ~ ~ .   . . ~ =    Z. :  ,  .  .                 ..          \n        =     .                 ..   .  . ?7 I.=I,=+.:Z~. +? =. ,  :,     Z .. ~.   7... ==  : ,          .    . :    ~  \n ..     .  7         .   ..       ?. . . .,   .$ Z.+..: .. ., 7  ,:.  ,.        . + ::?7,.~ .  =     . ..             ,, \n        :,7 . .  Z,         .,    .     II . .  ?~  $   I.      . .   .         ,I ?  ,,.=.   ,                          \n   . .   $ ..M    ...         ..N         .   .  .  : ~   ,. . +    + ?    . . =    D  .8,  .., .   .                   7\n   +        7  .    I.              .    :   .          .I .    .   .         , :? I?.N? . .....                     O7D \n            I , :,  ,                  :.  .          ?$  .     .  +  ...  =.. . ,  +?I Z  +~   . .       ..   Z      .  \n                I       ,       ~O           .  .: .. .:             ,   7..  .   .   .  ~ ..    .                       \n           . . .  :            .     .  .,        =      .   ..     .   .   .  .: =.,+          =    .                Z  \n  8 +           N                .     +,   . ,N              .     ,   .O. .  D.       ..           . :        ,        \n           7      .=  D  ?   ..      ...   =  I : .. ?   :     :  :  :.  ~  ,. 8.  ,.       .         .. ,               \n . .       Z    ...I   . I  .    .   ..   . .  I   ....   = .8 O:         .I.    : ~ :               ,  ~.             7 \n :      .         ..      ?    .$ .    7     : +   I            : :, ,,I ::,. =8,  .        $                            \n                   ,+  =  . .       .  Z       . .   ,:   . M =   .  8:  :..   ,     .                                   \n              ,.    ,     ..,.          .   O ..: . .   :  . Z  . .   ..,   .   . I  ..                      ..          \n           ~   .            $        .     +   D M=  .       ..     8  ,       .                                         \n          .:                  ~    .O .. I ..:  M~. .. 7~ . ~  .   7                : .                                  \n                         .  Z   .O.   I~   ,  ~ +    ?     :      .                                   andromeda          \n           .      .       .               .            ....  .    .  ~     .       .    m31                              \n               .                ,.             ..   ,,      .    ..                .      . .                            \n                                              .   :   ..    =                       :                                    "
+SPLASH="$(cat ./splash.sh)"
+
 ##
 # First argument (optional) is a severity:
 # 1 (grey -- default), 2 (white), 3 (purple), 4 (yellow), 5 (red)
@@ -76,11 +77,11 @@ usage() {
   echo "
   Usage: ./$(basename $0)
 
-  Fetches the andromeda repositories and prepares the environment (dependencies).
+  Fetches Andromeda repos and sets up environment
 
   Options
   =======
-  -r <repo>:          Tries to fetch  a particular repository.
+  -r <repo>:          Fetch  a specific repository.
   -h:                 This help message
 
   "
@@ -91,9 +92,9 @@ usage() {
 # Generate submodules
 ##
 generate-submodules() {
-  out "\n  [Registering Universe]\n"
+  out "\n  [Initializing Submodules]\n"
   git submodule init 2>&1 | istart | iend
-  out "\n  [Initializing Universe]\n"
+  out "\n  [Updating Submodules]\n"
   { sleep 1 && out "    ..hang tight!" &}
   git submodule update 2>&1 | istart | iend
   for d in */ ; do 
@@ -102,8 +103,6 @@ generate-submodules() {
     git pull 2>&1 | istart | iend 
     cd ..;
   done
-  out "\n  [Andromeda Galaxy]\n"
-  out "$M31_INFO"
   out "\n  [Time is now $(date) +2,538,000 light years..]\n"
 }
 
@@ -117,7 +116,7 @@ cell() {
 ##
 # Add aliases to .*shrc's
 ##
-patch-rc() {
+patch-shell-config() {
   out "  [Patching .*rc]\n"
   out "  You can add the following shortcuts to your shell startup file"
   # Andromeda
@@ -129,6 +128,25 @@ patch-rc() {
   #  echo 'alias m31=$m31/m31/src/shell.js' >> $file
   #done
 }
+
+##
+# Unfortunately, npm v3, v4, and v5 have a problem with the `link` command.
+# As a result, we have to keep truck of local dependencies ourselves.
+##
+link-package() {
+  # this needs to be done manually
+  # DEPS=$(echo "attn./ doc/ logger/ utils/")
+  out "  [Linking Packages]\n"
+  cd logger/
+  npm install
+  npm link ../utils
+  npm link ../attn.
+  cd ../andromeda/
+  npm install
+  npm link ../utils
+  npm link ../logger
+}
+
 
 prelude() {
   clear
@@ -160,19 +178,19 @@ done
 
 if [[ -e "./.git" ]]; then
   # we are in git, invoke locally
-  prelude
   generate-submodules
+  link-package
 else
   # clone repository
   if [[ $SINGLE_REPO == 'true' ]]; then
     out "\n  [Cloning ${REPO_NAME}]\n"
     git clone git@github.com:andromeda/${REPO_NAME}.git 2>&1 | grep -v clon
   else
-    prelude
     out "  [Cloning Universe]\n"
     git clone git@github.com:andromeda/universe.git > /dev/null 2>&1
     cd universe
     generate-submodules
-    patch-rc
+    patch-shell-config
+    link-package
   fi
 fi
