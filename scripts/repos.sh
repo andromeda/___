@@ -143,16 +143,16 @@ link-package() {
   # DEPS=$(echo "attn./ doc/ logger/ utils/")
   out "  [Fetching Development Packages]\n"
   cd logger/
-  npm --loglevel=silent install > /dev/null
+  npm install --loglevel error > /dev/null
   cd ../andromeda/
-  npm --loglevel=silent install > /dev/null
+  npm install --loglevel error > /dev/null
   out "  [Linking Homegrown Packages]\n"
   cd ../logger/
-  npm --loglevel=silent link ../utils > /dev/null
-  npm --loglevel=silent link ../attn. > /dev/null
+  npm link --loglevel error ../utils > /dev/null
+  npm link --loglevel error ../attn. > /dev/null
   cd ../andromeda/
-  npm --loglevel=silent link ../utils > /dev/null
-  npm --loglevel=silent link ../logger > /dev/null
+  npm link --loglevel error ../utils > /dev/null
+  npm link --loglevel error ../logger > /dev/null
   cd ..
 }
 
@@ -200,8 +200,8 @@ else
     out "\n http://docs.ndr.md/book#setup-linking"
   else
     out "  [Cloning Repositories]\n"
-    git clone git@github.com:andromeda/___.git ./andromeda___ > /dev/null 2>&1
-    cd andromeda___
+    git clone git@github.com:andromeda/___.git ./andromeda_ > /dev/null
+    cd andromeda_
     generate-submodules
     link-package
     patch-shell-config
