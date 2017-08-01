@@ -141,13 +141,16 @@ patch-shell-config() {
 link-package() {
   # this needs to be done manually
   # DEPS=$(echo "attn./ doc/ logger/ utils/")
-  out "  [Linking Packages]\n"
+  out "  [Fetching Development Packages]\n"
   cd logger/
   npm --loglevel=silent install > /dev/null
+  cd ../andromeda/
+  npm --loglevel=silent install > /dev/null
+  out "  [Linking Homegrown Packages]\n"
+  cd ../logger/
   npm --loglevel=silent link ../utils > /dev/null
   npm --loglevel=silent link ../attn. > /dev/null
-  cd ../andromeda/ > /dev/null 2>&1
-  npm --loglevel=silent install > /dev/null
+  cd ../andromeda/
   npm --loglevel=silent link ../utils > /dev/null
   npm --loglevel=silent link ../logger > /dev/null
   cd ..
