@@ -200,7 +200,7 @@ else
     out "\n http://docs.ndr.md/book#setup-linking"
   else
     out "  [Cloning Repositories]\n"
-    git clone git@github.com:andromeda/___.git ./andromeda_ > /dev/null
+    git clone git@github.com:andromeda/___.git ./andromeda_ > /dev/null 2>&1
     cd andromeda_
     generate-submodules
     link-package
