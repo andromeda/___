@@ -1,8 +1,11 @@
 #!/bin/bash
 
-for d in andromeda doc jesc ndr.md; do 
+# Pull from all remote branches
+# (for these four projects)
+for d in andromeda doc utils logger; do 
     echo "pulling in $d"
     cd $d;
-    git pull 
+    #git pull 
+    git remote -v update
     cd ..;
 done
