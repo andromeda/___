@@ -156,10 +156,34 @@ link-package() {
   cd ..
 }
 
+# Set up a global npm directory locally, and link packages
+npm-global-ok() {
+  echo '`npm install` already does not require sudo'
+  
+}
+npm-global-setup() {
+  mkdir ~/.npm-global
+  npm config set prefix '~/.npm-global'
+  echo 'export PATH=~/.npm-global/bin:$PATH' >> ~/.profile
+  source ~/.profile
+  echo 'run `source ~/.profile`'
+}
+
+npm-wihout-sudo() {
+[[ $(npm config get prefix) =~ ^${HOME}* ]] &&
+  npm-global-ok ||
+  npm-global-setup
+}
 
 prelude() {
   clear
   out "$SPLASH"
+}
+
+core-setup() {
+  generate-submodules
+  link-package
+  patch-shell-config
 }
 
 # Check which argument we have
@@ -187,9 +211,7 @@ done
 
 if [[ -e "./.git" ]]; then
   # we are in git, invoke locally
-  generate-submodules
-  link-package
-  # patch-shell-config
+  core-setup
 else
   # clone repository
   if [[ $SINGLE_REPO == 'true' ]]; then
@@ -200,10 +222,8 @@ else
     out "\n http://docs.ndr.md/book#setup-linking"
   else
     out "  [Cloning Repositories]\n"
-    git clone git@github.com:andromeda/___.git ./andromeda_ > /dev/null 2>&1
-    cd andromeda_
-    generate-submodules
-    link-package
-    patch-shell-config
+    git clone git@github.com:andromeda/___.git ./andromeda > /dev/null 2>&1
+    cd andromeda
+    core-setup
   fi
 fi
