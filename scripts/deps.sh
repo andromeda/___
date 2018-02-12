@@ -30,7 +30,6 @@ npm_global_setup() {
   npm config set prefix '~/.npm-global'
   echo 'export PATH=~/.npm-global/bin:$PATH' >> ~/.profile
   source ~/.profile
-  echo 'run `source ~/.profile`'
 }
 
 link_package() {
@@ -57,10 +56,9 @@ if [[ $CONN_TYPE == "http" ]]; then
 else
   get_repos_ssh
 fi
-
 # 2. Fix NPM's global packages to play without sudo
 npm_global_setup
-
+source ~/.profile
 # 3. Link all Andromeda-related packages
 link_package
 
