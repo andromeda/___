@@ -4,16 +4,25 @@
 
 # REQUIRED: replace nvasilakis with your GitHub username!
 GH_USERNAME="nvasilakis"
-# Optional: Replace http with git, if you have already added your key to GitHub.
+# Optional: Replace http with git, if you have 
+#           already added your SSH public key to GitHub.
 CONN_TYPE=http
 
 
-get_repos() {
+get_repos_http() {
   git clone https://github.com/"${GH_USERNAME}"/andromeda.git
   git clone https://github.com/"${GH_USERNAME}"/utils.git
   git clone https://github.com/"${GH_USERNAME}"/attn..git
   git clone https://github.com/"${GH_USERNAME}"/logger.git
   git clone https://github.com/"${GH_USERNAME}"/docs.git
+}
+
+get_repos_ssh() {
+  git clone git@github.com:"${GH_USERNAME}"/andromeda.git
+  git clone git@github.com:"${GH_USERNAME}"/utils.git
+  git clone git@github.com:"${GH_USERNAME}"/attn..git
+  git clone git@github.com:"${GH_USERNAME}"/logger.git
+  git clone git@github.com:"${GH_USERNAME}"/docs.git
 }
 
 npm_global_setup() {
@@ -27,12 +36,12 @@ npm_global_setup() {
 link_package() {
   # this needs to be done manually
   # DEPS=$(echo "attn./ doc/ logger/ utils/")
-  out "  [Fetching Development Packages]\n"
+  echo "  [Fetching Development Packages]"
   cd logger/
   npm install --loglevel error > /dev/null
   cd ../andromeda/
   npm install --loglevel error > /dev/null
-  out "  [Linking Homegrown Packages]\n"
+  echo "  [Linking Homegrown Packages]"
   cd ../logger/
   npm link --loglevel error ../utils > /dev/null
   npm link --loglevel error ../attn. > /dev/null
@@ -42,4 +51,18 @@ link_package() {
   cd ..
 }
 
+# 1. Download repositories in the current directory
+if [[ $CONN_TYPE == "http" ]]; then
+  get_repos_http
+else
+  get_repos_ssh
+fi
+
+# 2. Fix NPM's global packages to play without sudo
+npm_global_setup
+
+# 3. Link all Andromeda-related packages
+link_package
+
+echo 'run `source ~/.profile` or restart your computer'
 
